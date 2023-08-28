@@ -56,7 +56,7 @@
             </div>
             <hr class="border border-2 opacity-75">
             <div class="h1 fw-bold mt-4">프로젝트 소개</div>
-            <div class="detail fw-bold my-4" th:text="${writerInfo.getDetail()}"></div>
+            <div class="detail fw-bold my-4" th:utext="${writerInfo.getDetail()}"></div>
 
             <div class="btnDiv">
                 <div th:if="${session.memberLogin}">

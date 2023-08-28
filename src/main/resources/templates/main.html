@@ -175,6 +175,18 @@
             display: none;
         }
 
+        .notice {
+            text-align: center;
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 1%;
+            margin-bottom: 1%;
+        }
+
+        .search {
+            margin-right: 40%;
+        }
+
         .btnn {
             display: inline-block;
             padding: 0 30px;
@@ -234,7 +246,7 @@
             display: inline-block;
             justify-content: center;
 
-            margin-left: 8%;
+
         }
 
     </style>
@@ -254,7 +266,7 @@
     </div>
 
 
-    <div class="notice" style="margin-left: 10%">
+    <div class="notice" >
 
 
         <div class="gr">
@@ -263,10 +275,10 @@
                 <div class="mainContainer">
                     <div class="search-window">
                         <form action="">
-                            <div class="search-wrap" style="height: 38px;">
+                            <div class="search-wrap" >
                                 <span class="search" type="text"
                                       style="font-size: 18px; text-align: center;line-height: 2.5em;">구인 리스트</span>
-                                <a style="text-decoration: none; line-height: 2.4em;" class="btnn btn-dark"
+                                <a style="text-decoration: none; line-height: 2.4em; height: 40px;" class="btnn btn-dark"
                                    onclick="location.href='/epRecruit/epRecruitList'">더보기</a>
                             </div>
                         </form>
@@ -307,10 +319,10 @@
             <div class="board-search">
                 <div class="mainContainer">
                     <div class="search-window">
-                        <div class="search-wrap" style="height: 38px;">
+                        <div class="search-wrap" >
                                 <span class="search" type="text"
                                       style="font-size: 18px; text-align: center;line-height: 2.5em;">구직 리스트</span>
-                            <a style="text-decoration: none; line-height: 2.4em;" class="btnn btn-dark"
+                            <a style="text-decoration: none; line-height: 2.4em; height: 40px;" class="btnn btn-dark"
                                onclick="location.href='/jobHunting/jobHuntingList'">더보기</a>
                         </div>
                     </div>
