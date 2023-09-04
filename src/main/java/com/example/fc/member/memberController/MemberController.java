@@ -60,7 +60,7 @@ public class MemberController {
 
 
     /* 회원가입 */
-    @GetMapping("/insert")
+    @GetMapping("insert")
     public String memberJoin() {
         return "/member/memberJoinForm";
     }
@@ -74,7 +74,7 @@ public class MemberController {
     }
 
     /* 로그인 */
-    @GetMapping("/login")
+    @GetMapping("login")
     public String memberLogin(HttpSession session, Model model, HttpServletRequest request,  @RequestParam(required = false) String verifyingCode) {
 
         String userType2 = request.getParameter("userType2");
@@ -133,7 +133,7 @@ public class MemberController {
 
     
 //    로그아웃
-    @GetMapping("/logout")
+    @GetMapping("logout")
     public String memberLogout(HttpSession session) {
         session.invalidate(); //세션 전체를 날려버린다.
 //        session.removeAttribute("memberLogin"); //하나씩 날릴려면 이렇게 사용해도 된다
@@ -141,14 +141,14 @@ public class MemberController {
     }
 
 //    마이페이지 호출
-    @GetMapping("/myPage")
+    @GetMapping("myPage")
     public String myPage(HttpSession session) {
         session.getAttribute("memberLogin");
         System.out.println("세션값 -----------------" + session.getAttribute("memberLogin"));
         return "/member/memberMyPageForm";
     }
 //    멤버 수정
-    @GetMapping("/modify")
+    @GetMapping("modify")
     public String memberModify(HttpSession session){
         session.getAttribute("memberLogin");
         return "/member/memberModifyForm";
@@ -172,18 +172,18 @@ public class MemberController {
         return "/loginForm";
     }
     @ResponseBody // 값 변환을 위해 꼭 필요함
-    @GetMapping("/mIdCheck") // 아이디 중복확인을 위한 값으로 따로 매핑
+    @GetMapping("mIdCheck") // 아이디 중복확인을 위한 값으로 따로 매핑
     public int idCheck(MemberVo memberVo) throws Exception{
         System.out.println("memberVo값 = " + memberVo);
         int result = memberService.idCheck(memberVo); // 중복확인한 값을 int로 받음
         System.out.println("result +++++++++= 6+++++++++++++++++++::::" + result);
         return result;
     }
-    @GetMapping("/memberPassword")
+    @GetMapping("memberPassword")
     public String memberPassword() {
         return "member/memberFindPass";
     }
-    @GetMapping("/memberFindResult")
+    @GetMapping("memberFindResult")
     public String memberFindResult() {return "member/memberFindResult";
     }
 
@@ -206,7 +206,7 @@ public class MemberController {
 
     //실패시 알람창
     @ResponseBody
-    @GetMapping("/findAlert")
+    @GetMapping("findAlert")
     public String findAlert(){
         String failmessage ="";
         failmessage = "<script>alert('올바르지 않은 정보입니다.'); history.go(-1);</script>";
