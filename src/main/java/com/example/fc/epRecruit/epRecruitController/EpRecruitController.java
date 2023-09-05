@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/epRecruit")
+@RequestMapping("epRecruit")
 @RequiredArgsConstructor
 @Log4j2
 public class EpRecruitController {
@@ -48,13 +48,13 @@ public class EpRecruitController {
     //이메일 관련 서비스
     private final EmailSenderService emailSenderService;
 
-    @GetMapping("/epRecruitForm")
+    @GetMapping("epRecruitForm")
     public String recruitForm(HttpSession session) {
         EpVo epVo = (EpVo) session.getAttribute("epLogin");
         System.out.println("session >>" + epVo);
 
         if (session.getAttribute("epLogin") != null) {
-            return "/epRecruit/epRecruitForm";
+            return "epRecruit/epRecruitForm";
         } else {
             return "redirect:/login";
         }
@@ -62,7 +62,7 @@ public class EpRecruitController {
     }
 
     //  구인 게시판 저장
-    @PostMapping("/epRecruitAction")
+    @PostMapping("epRecruitAction")
     public String epRecruitSave(EpRecruitVO epRecruitVO, String showingDate, String showingHour, String showingMin, @RequestParam("file") MultipartFile[] files, HttpSession session) throws IOException {
 
         String showingPeriod = showingDate + " " + showingHour + ":" + showingMin + ":59";
@@ -116,10 +116,10 @@ public class EpRecruitController {
     public String epRecruitActionSuccess(Model model) {
         Long epRecruitLastId = epRecruitService.epRecruitLastId();
         model.addAttribute("epRecruitLastId", epRecruitLastId);
-        return "/epRecruit/epRecruitActionSuccess";
+        return "epRecruit/epRecruitActionSuccess";
     }
 
-    @GetMapping("/epRecruitList")
+    @GetMapping("epRecruitList")
     public String epRecruitList(@RequestParam(value = "stack", required = false, defaultValue = "") String stack,
                                 @RequestParam(value = "title", required = false, defaultValue = "") String title,
                                 Model model, HttpSession session, @PageableDefault(page = 0, size = 6) Pageable pageable) {
@@ -157,7 +157,7 @@ public class EpRecruitController {
 
             model.addAttribute("epList", page);
 
-            return "/epRecruit/epRecruitList";
+            return "epRecruit/epRecruitList";
         }  else {
             return "redirect:/login";
         }
@@ -222,7 +222,7 @@ public class EpRecruitController {
     }
 
     //지원 추천서 양식
-    @GetMapping("/sendEmail")
+    @GetMapping("sendEmail")
     public String getSendEmail(@RequestParam Long toSendAddr, Model model){
         MemberVo writerInfo = jobHunting.memberInfo(toSendAddr);
        // EpVo writerInfo = epRecruitService.epInfo(toSendAddr);
@@ -233,7 +233,7 @@ public class EpRecruitController {
     }
 
     //이력서 보내기
-    @PostMapping("/sendEmail")
+    @PostMapping("sendEmail")
     @ResponseBody
     public String PostSendEmail(EpRecruitDto dto){
         System.out.println("dto = " + dto);

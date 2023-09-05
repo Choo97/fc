@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RequestMapping("/jobHunting")
+@RequestMapping("jobHunting")
 @Controller
 public class JobHuntingController {
 
@@ -37,14 +37,14 @@ public class JobHuntingController {
     private final EmailSenderService emailSenderService;
 
     /*구직 게시글 부분*/
-    @GetMapping("/jobHuntingForm")
+    @GetMapping("jobHuntingForm")
     public String getJobHunting() {
 
         return "jobHunting/memberJobHuntingForm";
     }
 
     //구직게시판 저장
-    @PostMapping("/jobHuntingForm")
+    @PostMapping("jobHuntingForm")
     public String postJobHuntingForm(MemberJobHuntingVo jobHunt, String showingDate, String showingHour, String showingMin, HttpSession session) throws IOException {
 //        System.out.println("insertResult = " + file[0].getResource());
         System.out.println("jobHunt = " + jobHunt);
@@ -72,7 +72,7 @@ public class JobHuntingController {
     }
 
     //게시글 리스트
-    @GetMapping("/jobHuntingList")
+    @GetMapping("jobHuntingList")
     public String getMemberJobHuntingList(Model model, HttpSession session, @PageableDefault(page = 0, size = 6) Pageable pageable) {
         if (session.getAttribute("epLogin") != null || session.getAttribute("memberLogin") != null) {
             List<MemberJobHuntingVo> jobHuntingList = jobHunting.findAllJobHunting();
@@ -95,7 +95,7 @@ public class JobHuntingController {
 
 
     //작성된 게시글 보기
-    @GetMapping("/jobHuntingPoster")
+    @GetMapping("jobHuntingPoster")
     public String getMemberJobHuntingPoster(MemberJobHuntingVo memberBoard, Model model) {
         MemberJobHuntingVo boardInfo = jobHunting.findAllByMemberBoard(memberBoard); //게시글 번호로 모든 정보 찾기
         MemberVo memberInfo = jobHunting.memberInfo(boardInfo.getMemberId());//게시글 쓴 사람 정보 다 가져오기
@@ -110,7 +110,7 @@ public class JobHuntingController {
     }
 
     //수정할 게시글 보기
-    @GetMapping("/updateForm")
+    @GetMapping("updateForm")
     public String update(Model model, MemberJobHuntingVo memberBoard) {
         System.out.println("memberBoard update= " + memberBoard);
         System.out.println("memberBoard id = " + memberBoard.getMemberBoard());
@@ -125,7 +125,7 @@ public class JobHuntingController {
     }
 
     //게시글 수정하기
-    @PostMapping("/updateForm")
+    @PostMapping("updateForm")
     public String postUpate(Model model, MemberJobHuntingVo memberBoard, String showingDate, String showingHour, String showingMin) {
         System.out.println("memberBoard = " + memberBoard);
         int result = jobHunting.updateJobHuntingBoard(memberBoard, showingDate, showingHour, showingMin);
@@ -137,7 +137,7 @@ public class JobHuntingController {
     }
 
     //게시글 삭제하기
-    @GetMapping("/delete")
+    @GetMapping("delete")
     public String delete(Long memberBoard) {
         int result = jobHunting.deleteMemberBoardByMemberBoard(memberBoard);
         System.out.println("게시글 삭제 결과는? = " + result);
@@ -145,7 +145,7 @@ public class JobHuntingController {
     }
 
     //지원서 양식
-    @GetMapping("/sendEmail")
+    @GetMapping("sendEmail")
     public String getSendEmail(@RequestParam Long toSendAddr, Model model){
         EpVo writerInfo = epRecruitService.epInfo(toSendAddr);
         // MemberVo writerInfo = jobHunting.memberInfo(toSendAddr);
@@ -155,7 +155,7 @@ public class JobHuntingController {
     }
 
     //이력서 보내기
-    @PostMapping("/sendEmail")
+    @PostMapping("sendEmail")
     @ResponseBody
     public String PostSendEmail(MemberJobHuntingEmailDto dto){
         System.out.println("dto = " + dto);

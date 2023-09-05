@@ -53,7 +53,7 @@ public class MemberController {
     }
 
     /* 회원가입 전 회원/기업 선택 */
-    @GetMapping("/joinSelect")
+    @GetMapping("joinSelect")
     public String joinSelect(){
         return "joinForm";
     }
@@ -65,12 +65,12 @@ public class MemberController {
         return "/member/memberJoinForm";
     }
 
-    @PostMapping("/insert")
+    @PostMapping("insert")
     public String memberJoin(MemberVo memberVo) {
         log.info("회원가입 폼에서 입력받은 데이터: {}", memberVo);
         memberService.memberJoin(memberVo);
 
-        return "/loginForm";
+        return "loginForm";
     }
 
     /* 로그인 */
@@ -137,7 +137,7 @@ public class MemberController {
     public String memberLogout(HttpSession session) {
         session.invalidate(); //세션 전체를 날려버린다.
 //        session.removeAttribute("memberLogin"); //하나씩 날릴려면 이렇게 사용해도 된다
-        return "/loginForm";
+        return "loginForm";
     }
 
 //    마이페이지 호출
@@ -145,13 +145,13 @@ public class MemberController {
     public String myPage(HttpSession session) {
         session.getAttribute("memberLogin");
         System.out.println("세션값 -----------------" + session.getAttribute("memberLogin"));
-        return "/member/memberMyPageForm";
+        return "member/memberMyPageForm";
     }
 //    멤버 수정
     @GetMapping("modify")
     public String memberModify(HttpSession session){
         session.getAttribute("memberLogin");
-        return "/member/memberModifyForm";
+        return "member/memberModifyForm";
     }
 
     @PostMapping("/modify")
@@ -159,7 +159,7 @@ public class MemberController {
         memberService.memberModify(memberVo);
         log.info("회원 수정 폼에서 입력받은 데이터: {}", memberVo);
         session.setAttribute("memberLogin",memberVo);
-        return "/member/memberMyPageForm";
+        return "member/memberMyPageForm";
     }
 
     @PostMapping("/delete")
@@ -169,7 +169,7 @@ public class MemberController {
                   
         session.removeAttribute("memberLogin");
         log.info("--------------------들어온 값" + memberVo.getId());
-        return "/loginForm";
+        return "loginForm";
     }
     @ResponseBody // 값 변환을 위해 꼭 필요함
     @GetMapping("mIdCheck") // 아이디 중복확인을 위한 값으로 따로 매핑
