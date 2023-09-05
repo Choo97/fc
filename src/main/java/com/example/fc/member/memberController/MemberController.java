@@ -62,7 +62,7 @@ public class MemberController {
     /* 회원가입 */
     @GetMapping("insert")
     public String memberJoin() {
-        return "/member/memberJoinForm";
+        return "member/memberJoinForm";
     }
 
     @PostMapping("insert")
@@ -100,7 +100,7 @@ public class MemberController {
         return "loginForm";
     }
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public String memberLogin(MemberVo memberVo, HttpSession session, EmailVerification emailVerification) {
         //로그인시 받아온 값을 서비스로 넘겨줌
         System.out.println("emailVerification ctr = " + emailVerification);
@@ -154,7 +154,7 @@ public class MemberController {
         return "member/memberModifyForm";
     }
 
-    @PostMapping("/modify")
+    @PostMapping("modify")
     public String memberModify(MemberVo memberVo, HttpSession session){
         memberService.memberModify(memberVo);
         log.info("회원 수정 폼에서 입력받은 데이터: {}", memberVo);
@@ -162,7 +162,7 @@ public class MemberController {
         return "member/memberMyPageForm";
     }
 
-    @PostMapping("/delete")
+    @PostMapping("delete")
     public String memberDelete(MemberVo memberVo,HttpSession session){
 
         memberService.memberDelete(memberVo);
@@ -188,7 +188,7 @@ public class MemberController {
     }
 
     //비밀번호찾기
-    @PostMapping("/mPasswordFind")
+    @PostMapping("mPasswordFind")
     public String mPasswordFind(MemberVo memberVo, HttpSession session) {
         MemberVo vo = memberService.memberPasswordCheck(memberVo);
         System.out.println("vo = " + vo);
@@ -214,7 +214,7 @@ public class MemberController {
     }
 
 
-    @PostMapping("/mEmailFind")
+    @PostMapping("mEmailFind")
     public String mEmailFind(MemberVo memberVo, HttpSession session){
         MemberVo vo = memberService.memberEmailCheck(memberVo);
         System.out.println("vo = " + vo);

@@ -65,7 +65,7 @@ public class NoticeController {
     }
 
     //     공지사항 리스트
-    @GetMapping("/noticeAllList")
+    @GetMapping("noticeAllList")
     public String noticeList(Model model, @PageableDefault(page = 0, size = 10)Pageable pageable) {
         List<NoticeVo> noticeList = noticeService.noticeAllList();
         System.out.println("noticeList control = " + noticeList);
@@ -82,16 +82,16 @@ public class NoticeController {
         model.addAttribute("noticeList", page);
 
 
-        return "/support/noticeListForm";
+        return "support/noticeListForm";
     }
 
     //    공지사항 글 쓰기
-    @GetMapping("/noticeInsert")
+    @GetMapping("noticeInsert")
     public String noticeInsert() {
-        return "/support/noticeInsertForm";
+        return "support/noticeInsertForm";
     }
 
-    @PostMapping("/noticeInsert")
+    @PostMapping("noticeInsert")
     public String noticeInsert(NoticeVo noticeVo, HttpSession session) throws IOException {
         session.getAttribute("memberLogin");
         System.out.println(session);
@@ -103,7 +103,7 @@ public class NoticeController {
 
 
     //   공지사항 상세 조회
-    @GetMapping("/noticeOneList")
+    @GetMapping("noticeOneList")
     public String noticeOneList(Model model, int noticeBoard) {
         NoticeVo noticeVo = noticeService.noticeOneList(noticeBoard);
 //        List<NoticeFilesVo> noticeFilesVo = noticeService.noticeFilesList(noticeBoard);
@@ -112,19 +112,19 @@ public class NoticeController {
 //        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + noticeFilesVo);
         System.out.println("-===========================" + noticeBoard);
         System.out.println("-===========================" + noticeVo);
-        return "/support/noticeDetailForm";
+        return "support/noticeDetailForm";
     }
 
 
     //    공지사항 수정
-    @GetMapping("/noticeModify")
+    @GetMapping("noticeModify")
     public String noticeModify(Model model,int noticeBoard) {
         NoticeVo noticeVo = noticeService.noticeOneList(noticeBoard);
         model.addAttribute("noticeList", noticeVo);
-        return "/support/noticeModifyForm";
+        return "support/noticeModifyForm";
     }
 
-    @PostMapping("/noticeModify")
+    @PostMapping("noticeModify")
     public String noticeModify(Model model, NoticeVo noticeVo) {
         noticeService.noticeModify(noticeVo);
         System.out.println("=================================!!!:" + noticeVo);
@@ -134,7 +134,7 @@ public class NoticeController {
     }
 
     //    공지사항 삭제
-    @PostMapping("/noticeDelete")
+    @PostMapping("noticeDelete")
     public String noticeDelete(int noticeBoard) {
         System.out.println("삭제되기전 값 " + noticeBoard);
         noticeService.noticeDelete(noticeBoard);

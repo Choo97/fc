@@ -34,13 +34,13 @@ public class EpController {
     private final HashMap<String, UUID> hashMap;
 
     /* 회원가입 */
-    @GetMapping("/epInsert")
+    @GetMapping("epInsert")
     public String epJoin() {
-        return "/ep/enterpriseJoinForm";
+        return "ep/enterpriseJoinForm";
     }
     
     //회원가입 할 데이터 전송
-    @PostMapping("/epInsert")
+    @PostMapping("epInsert")
     @ResponseBody // 값 변환을 위해 꼭 필요함
     public String memberJoin(EpVo epVo){
         log.info("회원가입 폼에서 입력받은 데이터: {}",epVo);
@@ -49,22 +49,22 @@ public class EpController {
     }
 
     /* 로그인 */
-    @GetMapping("/epLogin")
+    @GetMapping("epLogin")
     public String epLogin(HttpSession session, @RequestParam(required = false) String verifyingCode, Model model) {
         System.out.println("verifiedCode = " + verifyingCode);
         session.removeAttribute("passwordFind");
         session.removeAttribute("emailFind");
         //post로 로그인이 되기떄문에 hidden으로 암호키 post로 전송
         model.addAttribute("verifyingCode", verifyingCode);
-        return "/loginForm";
+        return "loginForm";
     }
-    @GetMapping("/addMoreGetJob")
+    @GetMapping("addMoreGetJob")
     public String addMoreGetJob(){
 
-        return "/loginForm";
+        return "loginForm";
     }
 
-  /*  @PostMapping("/epLogin")
+  /*  @PostMapping("epLogin")
     public String epLogin(EpVo epVo, HttpSession session){
 
         if (session.getAttribute("epLogin") != null){
@@ -84,7 +84,7 @@ public class EpController {
         }
     }*/
 
-    @PostMapping("/epLogin")
+    @PostMapping("epLogin")
     public String epLogin(EpVo epVo, HttpSession session, EmailVerification emailVerification) {
         System.out.println("epVo = " + epVo);
         System.out.println("emailVerification = " + emailVerification);
@@ -116,17 +116,17 @@ public class EpController {
             //이메일 미인증 접근
         } else {
             System.out.println("로그인 실패");
-            return "/loginForm";
+            return "loginForm";
         }
     }
 
-    @GetMapping("/epModify")
+    @GetMapping("epModify")
     public String epModify() {
         System.out.println("epService = " + epService);
-        return "/ep/epModify";
+        return "ep/epModify";
     }
 
-    @PostMapping("/epModify")
+    @PostMapping("epModify")
     public String epModify(EpVo epVo, HttpSession session, @RequestParam String zipNo, @RequestParam String wRestAddress){
         String totalAddr = epVo.getAddr() + "|" +zipNo +"|"+ wRestAddress;
         System.out.println("totalAddr = " + totalAddr);
@@ -137,7 +137,7 @@ public class EpController {
         return "redirect:/";
     }
 
-    @PostMapping("/epDelete")
+    @PostMapping("epDelete")
     public String epDelete(EpVo epVo, HttpSession session) {
         epService.epDelete(epVo);
         session.removeAttribute("epLogin");
@@ -145,7 +145,7 @@ public class EpController {
     }
 
     @ResponseBody // 값 변환을 위해 꼭 필요함
-    @GetMapping("/idCheck") // 아이디 중복확인을 위한 값으로 따로 매핑
+    @GetMapping("idCheck") // 아이디 중복확인을 위한 값으로 따로 매핑
     public int idCheck(EpVo epVo) throws Exception {
 //        System.out.println("epVo값 = " + epVo);
         int result = epService.idCheck(epVo); // 중복확인한 값을 int로 받음
@@ -154,7 +154,7 @@ public class EpController {
     }
 
     @ResponseBody // 값 변환을 위해 꼭 필요함
-    @GetMapping("/nameCheck") // 아이디 중복확인을 위한 값으로 따로 매핑
+    @GetMapping("nameCheck") // 아이디 중복확인을 위한 값으로 따로 매핑
     public int nameCheck(EpVo  epVo) throws Exception{
 //        System.out.println("epVo값 = " + epVo);
         int result = epService.nameCheck(epVo); // 중복확인한 값을 int로 받음
@@ -162,18 +162,18 @@ public class EpController {
         return result;
     }
 
-    @GetMapping("/epPassword")
+    @GetMapping("epPassword")
     public String epPassword() {
         return "ep/epFindPass";
     }
 
 
-    @GetMapping("/epFindResult")
+    @GetMapping("epFindResult")
     public String epFindResult() {return "epFindResult";
     }
 
     @ResponseBody
-    @GetMapping("/epFindAlert")
+    @GetMapping("epFindAlert")
     public String epFindAlert(){
         String failmessage ="";
         failmessage = "<script>alert('올바르지 않은 정보입니다.'); history.go(-1);</script>";
@@ -181,7 +181,7 @@ public class EpController {
     }
 
 
-    @PostMapping("/passwordFind")
+    @PostMapping("passwordFind")
     public String passwordFind(EpVo epVo, HttpSession session) {
         EpVo vo = epService.epPasswordCheck(epVo);
         System.out.println("vo = " + vo);
@@ -190,12 +190,12 @@ public class EpController {
         if (vo != null) {
             session.setAttribute("passwordFind", vo);
             System.out.println("비밀번호 는 ============" + vo);
-            return "/ep/epFindResult";
+            return "ep/epFindResult";
         }
             return "redirect:/epFindAlert";
     }
 
-    @PostMapping("/emailFind")
+    @PostMapping("emailFind")
     public String emailFind(EpVo epVo, HttpSession session) {
         EpVo vo = epService.epEmailCheck(epVo);
         System.out.println("vo = " + vo);
@@ -204,7 +204,7 @@ public class EpController {
         if (vo != null) {
             session.setAttribute("emailFind", vo);
             System.out.println("이메일은 는 ============" + vo);
-            return "/ep/epFindResult";
+            return "ep/epFindResult";
         }return "redirect:/epFindAlert";
     }
 
@@ -240,12 +240,12 @@ public class EpController {
     //주소API컨트롤러
 
 
-    @GetMapping("/addrSearch")
+    @GetMapping("addrSearch")
     public String addTest() {
         return "ep/addrSearch";
     }
 
-    @GetMapping("/addrTest")
+    @GetMapping("addrTest")
     public String addrTest() {
         return "ep/addrTest";
     }

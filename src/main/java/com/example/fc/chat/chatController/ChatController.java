@@ -36,20 +36,20 @@ public class ChatController {
     public  final SimpMessagingTemplate template;
 
     /* **************** 참고용 소스 ************ */
-    @GetMapping("/chat")
+    @GetMapping("chat")
     public String getChat(){
 
         return "chat/view/chat";
     }
 
-    @GetMapping("/topic/public/{roomId}")
+    @GetMapping("topic/public/{roomId}")
     public void aaa(@PathVariable("roomId") String roomId) {
         System.out.println("roomId~~ = " + roomId);
 
     }
 
-    @MessageMapping("/chat.sendMessage")
-    @SendTo("/topic/public")
+    @MessageMapping("chat.sendMessage")
+    @SendTo("topic/public")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
         System.out.println("dudlrkdkseoa?");
         System.out.println(" ct sendMessage getContent= " + chatMessage.getContent());
@@ -81,7 +81,7 @@ public class ChatController {
     /* 소스코드 */
 
     //관리자용 모든 채팅방 보기
-    @GetMapping("/chatRoom")
+    @GetMapping("chatRoom")
     public String adminRoom(Model model){
         //모든 채팅 불러오기
         List<ChatDetail> allMemberChatList = chatService.findAllMemberChat();
@@ -101,13 +101,13 @@ public class ChatController {
         return "chat/view/chatRoom";
     }
 
-    @GetMapping("/memberChatRoom/{memberRoom}")
+    @GetMapping("memberChatRoom/{memberRoom}")
     public String getMemberChat(@PathVariable("memberRoom") String memberRoom){
 
         return "chat/view/memberChat";
     }
 
-    @GetMapping("/epChatRoom/{epRoom}")
+    @GetMapping("epChatRoom/{epRoom}")
     public String getEpChatMonitor(@PathVariable("epRoom") String epRoom ){
 
         return "chat/view/epChat";
@@ -115,7 +115,7 @@ public class ChatController {
 
 
     //일반회원용 채팅
-    @GetMapping("/memberChat/enterMemberRoom/{memberRoom}")
+    @GetMapping("memberChat/enterMemberRoom/{memberRoom}")
     public String getMemberChat(@PathVariable("memberRoom") int memberRoom, Model model){
         System.out.println("memberRoom = " + memberRoom);
         //방 존재 유무
@@ -135,7 +135,7 @@ public class ChatController {
     }
 
     //기업회원용 채팅
-    @GetMapping("/epChat/enterEpRoom/{epRoom}")
+    @GetMapping("epChat/enterEpRoom/{epRoom}")
     public String getEpChat(@PathVariable("epRoom") int epRoom, Model model){
         System.out.println("epRoom = " + epRoom);
         //방 존재 유무
@@ -160,7 +160,7 @@ public class ChatController {
     }
 
     //메세지 맵핑 관련
-    @MessageMapping("/chat/memberMsg")
+    @MessageMapping("chat/memberMsg")
     public void userChatMapping(@Payload ChatMessage chatMessage){
         System.out.println("chatMessage = " + chatMessage);
 
@@ -169,11 +169,11 @@ public class ChatController {
 
         //db에 메세지 삽입 성공시 메세지 보내기
         if(insertMsg == 1){
-            template.convertAndSend("/topic/memberRoom/"+chatMessage.getMemberVo().getId(), chatMessage);
+            template.convertAndSend("topic/memberRoom/"+chatMessage.getMemberVo().getId(), chatMessage);
         }
     }
 
-    @MessageMapping("/chat/epMsg")
+    @MessageMapping("chat/epMsg")
     public void epChatMapping(@Payload ChatMessage chatMessage, String epRoom){
         System.out.println("chatMessage = " + chatMessage);
         System.out.println("epRoom = " + epRoom);
@@ -183,7 +183,7 @@ public class ChatController {
         //db에 메세지 삽입 성공시 메세지 보내기
         if(insertMsg == 1){
 
-            template.convertAndSend("/topic/epRoom/"+ chatMessage.getEpRoom(), chatMessage);
+            template.convertAndSend("topic/epRoom/"+ chatMessage.getEpRoom(), chatMessage);
         }
 
     }

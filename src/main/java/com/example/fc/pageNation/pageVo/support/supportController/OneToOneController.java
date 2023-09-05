@@ -25,7 +25,7 @@ public class OneToOneController {
 
 //    /* 게시판 글 쓰기*/
     @ResponseBody//어노테이션을 사용하여 페이지에 데이터'만'을 전달할 수 있다.
-    @GetMapping("/personalInsert")
+    @GetMapping("personalInsert")
     public String noticeInsert(HttpSession session) {
         String result;
         if (session.getAttribute("epLogin") != null || session.getAttribute("memberLogin") != null) {
@@ -37,20 +37,20 @@ public class OneToOneController {
 
         return result;
     }
-    @GetMapping("/personalQuestion")
+    @GetMapping("personalQuestion")
     public String personalQuestion(HttpSession session) {
         if (session.getAttribute("epLogin") !=null) {
             return "support/epOneToOneQuestion";
 
         } else if (session.getAttribute("memberLogin") !=null) {
-            return "/support/memberOneToOneQuestion";
+            return "support/memberOneToOneQuestion";
         }else {
             return "main";
         }
     }
 
     //insert
-    @PostMapping("/personalInquire")
+    @PostMapping("personalInquire")
     public String personalInquire(MemberOneToOneVo memberOneToOneVo, EpOneToOneVo epOneToOneVo, HttpSession session) {
 
         if (session.getAttribute("epLogin") != null) {
@@ -64,7 +64,7 @@ public class OneToOneController {
         }
             return "main";
     }
-    @GetMapping("/epPage")
+    @GetMapping("epPage")
     public String myPage(HttpSession session, Model model) {
         EpOneToOneVo epOneToOneVo = (EpOneToOneVo) session.getAttribute("epOneToOneVo");
         if (epOneToOneVo == null) {
@@ -79,12 +79,12 @@ public class OneToOneController {
 //    System.out.println("count = " + count);
 //    session.getAttribute("epLogin");
 //    System.out.println("세션값 -----------------" + session.getAttribute("epLogin"));
-        return "/ep/epMyPageForm";
+        return "ep/epMyPageForm";
     }
 
 
 
-    @GetMapping("/epOneToOneFindEmail")
+    @GetMapping("epOneToOneFindEmail")
     public String epOneToOneFindEmail(Model model, HttpSession session) {
         EpVo epVo = (EpVo) session.getAttribute("epLogin");
         EpOneToOneVo epOneToOneVo = (EpOneToOneVo) session.getAttribute("epOneToOneVo");
@@ -97,11 +97,11 @@ public class OneToOneController {
         if (count ==0){
            return "redirect:/failFindEmail";
         }else {
-        return "/support/epOneToOneFindEmail";
+        return "support/epOneToOneFindEmail";
         }
     }
         @ResponseBody
-        @GetMapping("/failFindEmail")
+        @GetMapping("failFindEmail")
         public String failFindEmail(){
           String  noOneToOne = "<script>alert('1:1문의가 존재하지않습니다 문의후 이용해주세요.');location.href='/epPage';</script>";
             return noOneToOne;
@@ -109,13 +109,13 @@ public class OneToOneController {
 
 //       1대1문의 상세 조회
 
-    @GetMapping("/oneToOneList")
+    @GetMapping("oneToOneList")
     public String noticeOneList(EpOneToOneVo epOneToOneVo, Model model, HttpSession session,int id) {
         epOneToOneVo = epOneToOneService.noticeOneList(id);
         model.addAttribute("oneToOneList", epOneToOneVo);
         EpVo epVo = (EpVo) session.getAttribute("epLogin");
         if(epOneToOneVo.getEmail().equals(epVo.getEmail())){
-        return "/support/oneToOneDetailForm";
+        return "support/oneToOneDetailForm";
 
 
         }else {
@@ -125,7 +125,7 @@ public class OneToOneController {
     }
     
     //1대1 수정
-    @PostMapping("/oneToOneModify")
+    @PostMapping("oneToOneModify")
     public String oneToOneModify(EpOneToOneVo epOneToOneVo, HttpSession session){
         System.out.println("session*********************************** = " + session);
         System.out.println("epOneToOneVo.getIdgetIdgetIdgetIdgetIdgetIdgetIdgetId = " + epOneToOneVo);
@@ -134,7 +134,7 @@ public class OneToOneController {
         return "redirect:/epOneToOneFindEmail";
     }
 //    1대 1문의 삭제
-    @PostMapping("/epOneToOneDelete")
+    @PostMapping("epOneToOneDelete")
     public String epOneToOneDelete(EpOneToOneVo epOneToOneVo, HttpSession session){
         System.out.println("session*********************************** = " + session);
         System.out.println("epOneToOneVo.deletedeletedeletedeletedeletedeletedelete = " + epOneToOneVo);
