@@ -98,11 +98,13 @@ public class EpRecruitController {
         try {
             InputStream fileStream = multipartFile.getInputStream();
             FileUtils.copyInputStreamToFile(fileStream, targetFile);    //파일 저장
+            log.info("파일 저장됨");
             jsonObject.addProperty("url", "/epRecruitContent/" + savedFileName);
             jsonObject.addProperty("responseCode", "success");
 
         } catch (IOException e) {
             FileUtils.deleteQuietly(targetFile);    //저장된 파일 삭제
+            log.info("파일 저장안됨");
             jsonObject.addProperty("responseCode", "error");
             e.printStackTrace();
         }
