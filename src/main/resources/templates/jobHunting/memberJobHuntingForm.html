@@ -79,7 +79,7 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col-form-label col-sm-2 pt-0"><label>모집상태</label></div>
+                <div class="col-form-label col-sm-2 pt-0"><label>구직상태</label></div>
 
                 <div class="col-sm-10">
                     <div class="form-check form-check-inline">
@@ -89,26 +89,6 @@
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" id="private" name="recruitCondition" value="비공개" checked>
                         <label class="form-check-label" for="private">비공개</label>
-                    </div>
-                </div>
-
-
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-form-label col-sm-2 pt-0"><label>성별</label></div>
-                <div class="col-sm-10">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="any" name="gender" value="무관" checked>
-                        <label class="form-check-label" for="any">무관</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="male" name="gender" value="남성">
-                        <label class="form-check-label" for="male">남성</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="female" name="gender" value="여성">
-                        <label class="form-check-label" for="female">여성</label>
                     </div>
                 </div>
             </div>
@@ -130,18 +110,6 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col-form-label col-sm-2 pt-0"><label>게시글 종료 기간</label></div>
-                <div class="col-sm-10">
-                    <div class="input-group">
-                        <input class=" form-control" id="showingDate" type="date" name="showingDate">
-                        <!--                        <span class="input-group-text">~</span>-->
-                        <select class="form-select" name="showingHour" id="showingHour"></select>
-                        <select class="form-select" name="showingMin" id="showingMin"></select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mb-3">
                 <div class="col-form-label col-sm-2 pt-0"><label>계약기간</label></div>
                 <div class="col-sm-10">
                     <div class="input-group">
@@ -150,7 +118,6 @@
                         <input class=" form-control" id="endDate" type="date" name="workDayEnd">
                     </div>
                 </div>
-
             </div>
 
             <div class="row mb-3">
@@ -161,19 +128,11 @@
             </div>
 
             <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="detail">상세요강</label>
+                <label class="col-sm-2 col-form-label" for="detail">상세내용</label>
                 <div class="col-sm-10">
                     <textarea id="detail" type="text" th:class="form-control" name="detail"></textarea>
                 </div>
             </div>
-
-            <!--            <div class="row mb-3">-->
-            <!--                <label class="col-sm-2 col-form-label" for="file">썸네일 등록</label>-->
-            <!--                <div class="col-sm-10">-->
-            <input class="form-control" type="file" id="file" name="file"
-                   accept=".jpg, .jpeg, .png" hidden="hidden"/>
-            <!--                </div>-->
-            <!--            </div>-->
 
             <div class="mb-3 text-start">
                 <button class="btn btn-primary" type="button">이전페이지</button>
@@ -198,29 +157,6 @@
             document.querySelector("#startDate").value = date.toISOString().substring(0, 10);
             document.querySelector("#endDate").value = date.toISOString().substring(0, 10);
             date.setMonth(date.getMonth() + 1);
-            document.querySelector("#showingDate").value = date.toISOString().substring(0, 10);
-
-            let hourSel = document.querySelector("#showingHour");
-            for (let i = 0; i < 24; i++) {
-                let opt = document.createElement("option");
-                opt.value = i;
-                opt.innerText = i + "시";
-                if (i === 12) {
-                    opt.selected = true;
-                }
-                hourSel.options.add(opt)
-            }
-
-            let minSel = document.querySelector("#showingMin");
-            for (let i = 0; i < 60; i++) {
-                let opt = document.createElement("option");
-                opt.value = i;
-                opt.innerText = i + "분";
-                if (i === 30) {
-                    opt.selected = true;
-                }
-                minSel.options.add(opt)
-            }
 
             $('#detail').summernote({
                 // 에디터 높이
@@ -313,6 +249,4 @@
     </th:block>
 
 </div>
-
-
 </html>

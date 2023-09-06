@@ -35,9 +35,9 @@
                 <div class="text-center" th:if="${list.fileAttached} == 1">
                     <img class="rounded" th:src="@{/epRecruit/} + ${ep.getThumbnailFileName()}">
                 </div>
-                <div class="period">
-                    <span th:text="'마감일 | ' + ${list.getShowingPeriod().substring(0, 10)}"></span>
-                </div>
+<!--                <div class="period">-->
+<!--                    <span th:text="'마감일 | ' + ${list.getShowingPeriod().substring(0, 10)}"></span>-->
+<!--                </div>-->
                 <div class="title">
                     <a class="" th:href="@{/jobHunting/jobHuntingPoster(memberBoard=${list.memberBoard})}" th:text="${ list.title}"></a>
                 </div>
