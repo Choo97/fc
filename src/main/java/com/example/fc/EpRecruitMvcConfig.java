@@ -30,7 +30,7 @@ public class EpRecruitMvcConfig implements WebMvcConfigurer {
 //    프로젝트경로 외부에서 디렉토리 접근하는법
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(uploadEpRecruit).addResourceLocations(getEpRecruitMainThumbnailPath);
-        registry.addResourceHandler(uploadEpRecruitContent).addResourceLocations(getEpRecruitContentPath).setCachePeriod(3600).resourceChain(true).addResolver(new PathResourceResolver()); //에디터사진업로드경로
+        registry.addResourceHandler(uploadEpRecruitContent).addResourceLocations(getEpRecruitContentPath); //에디터사진업로드경로
     }
 
 //    @Bean
