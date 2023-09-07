@@ -11,7 +11,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.resource.PathResourceResolver;
 
 @Configuration
-@EnableWebMvc
 public class EpRecruitMvcConfig implements WebMvcConfigurer {
     @Value("${getEpRecruitPath}")
     String getEpRecruitPath;
