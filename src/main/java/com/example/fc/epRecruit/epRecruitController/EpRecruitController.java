@@ -89,7 +89,7 @@ public class EpRecruitController {
 
         JsonObject jsonObject = new JsonObject();
 
-        String fileRoot = epRecruitContentLocationPath;    //저장될 외부 파일 경로  C:\\upload\\epRecruit\\content\\
+        String fileRoot = epRecruitContentLocationPath;    //저장될 외부 파일 경로  file:///home/ubuntu/epRecruit/content
         String originalFileName = multipartFile.getOriginalFilename();    //오리지날 파일명
         String extension = originalFileName.substring(originalFileName.lastIndexOf("."));    //파일 확장자
 
@@ -101,7 +101,7 @@ public class EpRecruitController {
             InputStream fileStream = multipartFile.getInputStream();
             FileUtils.copyInputStreamToFile(fileStream, targetFile);    //파일 저장
             log.info("파일 저장됨");
-            jsonObject.addProperty("url", epRecruitContentHandlerPath + savedFileName);
+            jsonObject.addProperty("url", "/epRecruitContent/" + savedFileName);
             jsonObject.addProperty("responseCode", "success");
 
         } catch (IOException e) {
