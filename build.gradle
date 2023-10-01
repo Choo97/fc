@@ -37,6 +37,16 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-mail' //메일 보내기 위한 그래들
 	implementation"org.springframework.boot:spring-boot-starter-websocket" //채팅구현을 위한 웹소캣
 
+//	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+//	implementation platform('com.amazonaws:aws-java-sdk-bom:1.12.529')
+//	implementation 'com.amazonaws:aws-java-sdk-s3'
+
+//	aws s3
+	// https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk
+	implementation group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.12.472'
+	// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-aws
+	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.1.RELEASE'
+
 
 
 	//  웹에디터 라이브러리

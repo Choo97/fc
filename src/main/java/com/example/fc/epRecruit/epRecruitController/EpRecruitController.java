@@ -38,10 +38,13 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Log4j2
 public class EpRecruitController {
-    @Value("${epRecruitContentUploadPath}")
+    @Value("${editorResourceLocation}")
     String epRecruitContentLocationPath;
-    @Value("${uploadEpRecruitContent}")
+    @Value("${editorResourceHandler}")
     String epRecruitContentHandlerPath;
+
+    @Value("${editorFileRoot}")
+    String editorFileRoot;
     private final EpRecruitService epRecruitService;
 
     //개인회원에게 이메일 보내기위함
@@ -89,7 +92,7 @@ public class EpRecruitController {
 
         JsonObject jsonObject = new JsonObject();
 
-        String fileRoot = epRecruitContentLocationPath;    //저장될 외부 파일 경로  file:///home/ubuntu/epRecruit/content
+        String fileRoot = editorFileRoot;    //저장될 외부 파일 경로  /home/ubuntu/epRecruit/content/
         String originalFileName = multipartFile.getOriginalFilename();    //오리지날 파일명
         String extension = originalFileName.substring(originalFileName.lastIndexOf("."));    //파일 확장자
 

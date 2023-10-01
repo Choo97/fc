@@ -12,24 +12,25 @@ import org.springframework.web.servlet.resource.PathResourceResolver;
 
 @Configuration
 public class EpRecruitMvcConfig implements WebMvcConfigurer {
-    @Value("${getEpRecruitPath}")
-    String getEpRecruitPath;
-    @Value("${getEpRecruitThumbnailPath}")
-    String getEpRecruitThumbnailPath;
     @Value("${getEpRecruitMainThumbnailPath}")
     String getEpRecruitMainThumbnailPath;
     @Value("${uploadEpRecruit}")
     String uploadEpRecruit;
-    @Value("${getEpRecruitContentPath}")
-    String getEpRecruitContentPath;
-    @Value("${uploadEpRecruitContent}")
-    String uploadEpRecruitContent;
+
+
+    @Value("${editorResourceLocation}")
+    String editorResourceLocation;
+    @Value("${editorResourceHandler}")
+    String editorResourceHandler;
 
     @Override
 //    프로젝트경로 외부에서 디렉토리 접근하는법
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(uploadEpRecruit).addResourceLocations(getEpRecruitMainThumbnailPath);
-        registry.addResourceHandler(uploadEpRecruitContent).addResourceLocations(getEpRecruitContentPath); //에디터사진업로드경로
+
+//        에디터사진업로드경로
+        registry.addResourceHandler(editorResourceHandler) // /epRecruitContent/**
+                .addResourceLocations("file://" + editorResourceLocation); // file:///home/ubuntu/epRecruit/content
     }
 
 //    @Bean
